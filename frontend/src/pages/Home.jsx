@@ -114,7 +114,10 @@ function Home() {
                 ✦ Analyze My Resume
                 <span style={{ fontSize: '18px' }}>→</span>
               </button>
-              <button className="btn-ghost" onClick={() => navigate('/dashboard')}>
+              <button className="btn-ghost" onClick={() => window.open('https://netizenssahil.vercel.app/', '_blank', 'noopener noreferrer')} style={{ fontSize: '16px', padding: '16px 36px', borderRadius: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                ✧ Generate Portfolio
+              </button>
+              <button className="btn-ghost" onClick={() => navigate('/dashboard')} style={{ fontSize: '16px', padding: '16px 36px', borderRadius: '14px', display: 'flex', alignItems: 'center', gap: '8px', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--muted2)' }}>
                 View Sample Report
               </button>
             </div>

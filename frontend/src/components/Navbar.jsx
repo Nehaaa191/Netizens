@@ -78,6 +78,13 @@ function Navbar() {
             </li>
           ))}
           <li style={{ marginLeft: '8px' }}>
+            <a href="https://netizenssahil.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <button className="btn-ghost" style={{ padding: '9px 22px', fontSize: '14px', borderRadius: '10px' }}>
+                ✧ Generate Portfolio
+              </button>
+            </a>
+          </li>
+          <li style={{ marginLeft: '8px' }}>
             <NavLink to="/upload">
               <button className="btn-primary" style={{ padding: '9px 22px', fontSize: '14px', borderRadius: '10px' }}>
                 ✦ Analyze Resume
