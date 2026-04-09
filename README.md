@@ -1,87 +1,140 @@
- Netizens AI
-Resume Analyzer + Instant Portfolio Generator
-<div align="center">
+# 🚀 Netizens — AI Resume Analyzer & Instant Portfolio Generator  
 
-Analyze your resume, get ATS score, find skill gaps, and generate a portfolio — in seconds.
+Analyze your resume, get ATS insights, detect skill gaps, and generate a portfolio — all in seconds.
 
- Fast ·  Smart ·  Beautiful UI
+🔗 **Link:** https://netizens-six.vercel.app/
 
-</div>
-✨ What It Does
-📄 AI Resume Analysis — Understands your resume like a recruiter
-📊 ATS Score — Checks keyword optimization & formatting
-🧠 Skill Detection — Extracts your technical & soft skills
-⚠️ Keyword Gaps — Shows what you’re missing
-💡 Smart Suggestions — Actionable improvements
-🎨 Auto Portfolio (coming soon) — Turn resume into a shareable site
-🖥️ Preview
-Home	Upload	Dashboard
-Animated hero UI	Drag & drop upload	Scores + insights
-⚙️ Tech Stack
+---
 
-Frontend
+## ✨ Overview  
 
-React + Vite
-React Router
-CSS (Glassmorphism + animations)
+**Netizens** is an AI-powered platform that evaluates your resume like a recruiter would. It provides actionable insights, improves ATS compatibility, and (soon) transforms your resume into a stunning personal portfolio.
 
-Backend
+Fast. Smart. Beautiful.
 
-Python + Flask
-pdfplumber, python-docx
+---
 
-AI
+## 🌟 Features  
 
-Google Gemini 1.5 Flash
-🚀 Quick Start
-1. Clone
+### 📄 AI Resume Analysis  
+Understands your resume contextually using advanced AI.
+
+### 📊 ATS Score  
+Evaluates formatting, keywords, and optimization for Applicant Tracking Systems.
+
+### 🧠 Skill Detection  
+Automatically extracts both technical and soft skills.
+
+### ⚠️ Keyword Gap Analysis  
+Identifies missing keywords to improve job matching.
+
+### 💡 Smart Suggestions  
+Provides clear, actionable recommendations to enhance your resume.
+
+### 🎨 Auto Portfolio *(Coming Soon)*  
+Generate a personal portfolio website directly from your resume.
+
+---
+
+## 🖥️ UI Highlights  
+
+- Animated hero section  
+- Clean glassmorphism design  
+- Drag & drop resume upload  
+- Interactive dashboard with insights  
+- Real-time feedback visualization  
+
+---
+
+## ⚙️ Tech Stack  
+
+### 🎨 Frontend  
+- React + Vite  
+- React Router  
+- CSS (Glassmorphism + Animations)  
+
+### 🔧 Backend  
+- Python + Flask  
+- pdfplumber  
+- python-docx  
+
+### 🤖 AI  
+- Google Gemini 1.5 Flash  
+
+---
+
+## 🚀 Quick Start  
+
+### 1. Clone the Repository  
+```bash
 git clone https://github.com/Nehaaa191/Netizens.git
 cd Netizens
-2. Frontend
+```
+
+### 2. Setup Frontend  
+```bash
 cd frontend
 npm install
 npm run dev
-3. Backend
+```
+
+### 3. Setup Backend  
+```bash
 cd backend
 python -m venv venv
-venv\Scripts\activate   # Windows
+venv\Scripts\activate  # Windows
 pip install -r requirements.txt
-4. Add API Key
+```
 
-Create .env inside backend/:
+### 4. Add API Key  
+Create a `.env` file inside `/backend`:
 
+```env
 GOOGLE_API_KEY=your_key_here
-5. Run Server
+```
+
+### 5. Run Backend Server  
+```bash
 python app.py
-🔄 How It Works
-Upload Resume → Extract Text → Gemini AI Analysis → JSON Response → Dashboard UI
-📡 API
-GET /health
+```
 
-Check if server is running
+---
 
-POST /upload
+## 🔄 How It Works  
 
-Upload resume → get analysis
+Upload Resume → Extract Text → AI Analysis → JSON Response → Dashboard Insights  
 
-🎯 Roadmap
- Resume analysis + ATS score
- Skill gap detection
- Portfolio generator
- PDF report export
- Job description matcher
- Auth + deployment
-🛠️ Common Issues
-❌ No text detected → Use selectable PDF
-❌ CORS error → Ports must match (5173 & 5000)
-❌ API error → Check .env file
-🙌 Credits
-Google Gemini AI
-pdfplumber
-React + Vite
-<div align="center">
+---
 
-💜 Built for hackathons by Netizens
-⭐ Star this repo if you like it!
+## 📡 API Endpoints  
 
-</div>
+### `GET /health`  
+Check if the server is running  
+
+### `POST /upload`  
+Upload resume and receive AI analysis  
+
+---
+
+## 🎯 Roadmap  
+
+- ✅ Resume analysis + ATS scoring  
+- ✅ Skill gap detection  
+- 🔄 Portfolio generator  
+- 🔄 PDF report export  
+- 🔄 Job description matcher  
+- 🔄 Authentication & deployment  
+
+---
+
+## 🛠️ Common Issues  
+
+❌ **No text detected** → Use a selectable (not scanned) PDF  
+❌ **CORS error** → Ensure ports match (Frontend: 5173, Backend: 5000)  
+❌ **API error** → Verify `.env` configuration  
+
+---
+
+## 💜 Built by Netizens  
+
+If you found this useful, consider ⭐ starring the repo!
