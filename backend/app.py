@@ -12,12 +12,7 @@ load_dotenv()
 
 app = Flask(__name__)
 
-CORS(app, origins=[
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:5174"
-])
+CORS(app, origins="*")
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
@@ -138,4 +133,4 @@ def upload_resume():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
