@@ -4,7 +4,7 @@ const cors = require('cors');
 const multer = require('multer');
 const pdfParse = require('pdf-parse');
 const mammoth = require('mammoth');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const Groq = require('groq-sdk');
 
 const app = express();
 app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:5174', 'http://127.0.0.1:5173', 'http://127.0.0.1:5174'] }));
@@ -15,7 +15,7 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 }
 });
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || 'dummy_api_key');
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 app.post('/upload', upload.single('resume'), async (req, res) => {
   try {
@@ -28,7 +28,8 @@ app.post('/upload', upload.single('resume'), async (req, res) => {
     let resumeText = '';
 
     if (filename.endsWith('.pdf')) {
-const data = await pdfParse.default ? await pdfParse.default(fileBytes) : await pdfParse(fileBytes);      resumeText = data.text;
+      const data = await pdfParse.default ? await pdfParse.default(fileBytes) : await pdfParse(fileBytes); 
+      resumeText = data.text;
     } else if (filename.endsWith('.docx') || filename.endsWith('.doc')) {
       const result = await mammoth.extractRawText({ buffer: fileBytes });
       resumeText = result.value;
@@ -39,11 +40,6 @@ const data = await pdfParse.default ? await pdfParse.default(fileBytes) : await 
     if (!resumeText || resumeText.length < 20) {
       return res.status(400).json({ success: false, error: 'Text extraction failed' });
     }
-
-    const model = genAI.getGenerativeModel({ 
-      model: 'gemini-2.5-flash',
-      generationConfig: { responseMimeType: 'application/json' }
-    });
 
     const prompt = `
     Analyze the resume text and return ONLY a valid JSON object with this exact structure:
@@ -74,18 +70,28 @@ const data = await pdfParse.default ? await pdfParse.default(fileBytes) : await 
     ${resumeText}
     `;
 
-    const result = await model.generateContent(prompt);
-    const responseText = result.response.text();
-    let rawText = responseText.trim();
-    if (rawText.startsWith('\`\`\`')) {
-      rawText = rawText.replace(/\`\`\`json/g, '').replace(/\`\`\`/g, '').trim();
-    }
+    const chatCompletion = await groq.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content: "You are an expert resume analyzer. You must output only a JSON object strictly matching the user's requested structure.",
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      model: "llama-3.3-70b-versatile",
+      response_format: { type: "json_object" },
+    });
 
+    const aiOutput = chatCompletion.choices[0].message.content.trim();
+    
     let parsedData;
     try {
-        parsedData = JSON.parse(rawText);
+      parsedData = JSON.parse(aiOutput);
     } catch(e) {
-        throw new Error("Failed to parse AI response");
+      throw new Error("Failed to parse AI response: " + e.message + " Raw Output: " + aiOutput.substring(0, 50));
     }
 
     return res.json({ success: true, data: parsedData });
